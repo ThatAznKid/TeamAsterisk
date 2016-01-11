@@ -1,2 +1,8 @@
 1/8/15 
+started work on Map.java 
+resolved issues 
 
+1/10/15 
+brought in MyRPG files 
+brought up issue about work 
+working version uploaded, details yet to be sorted (check issue)
