@@ -6,3 +6,7 @@ resolved issues
 brought in MyRPG files 
 brought up issue about work 
 working version uploaded, details yet to be sorted (check issue)
+
+1/11/15
+readme.txt created 
+
