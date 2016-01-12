@@ -10,3 +10,6 @@ working version uploaded, details yet to be sorted (check issue)
 1/11/15
 readme.txt created 
 
+1/12/15 
+driver uploaded to github
+option given to change amt of text delay
