@@ -13,3 +13,6 @@ readme.txt created
 1/12/15 
 driver uploaded to github
 option given to change amt of text delay
+
+1/13/15
+Map.java updated with new fixed map.
