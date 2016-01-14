@@ -1,6 +1,6 @@
 public class Map { 
     
-    private static Object[][] _map = {{"o","o","o"," "," "," "," "," "," ","o","o","o"},
+    private static final Object[][] _map = {{"o","o","o"," "," "," "," "," "," ","o","o","o"},
  			       {"o","T","o","+","+","=","=","+","+","o","A","o"},
  			       {"o","o","o"," "," "," "," "," "," ","o","o","o"},
  			       {" ","+"," "," "," ","B","=","+"," "," ","+"," "},
@@ -33,7 +33,8 @@ public class Map {
 	}
 	return s;
     }
-
+    
+    //accessors and mutators for x and y
     public int getx() {
 	return xcord;
     }
@@ -47,7 +48,8 @@ public class Map {
     public void sety(int newy) {
 	ycord = newy;
     }
-    
+	
+
     public static void main(String[] args){
     Map test = new Map();
     System.out.println(test);
