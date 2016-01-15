@@ -1,54 +1,17 @@
 To-do list
-1. Map.java (4 - 5 days)
+1. Map.java (2-3 days)
 	Uses land to generate fixed 2D array
-	Implement new class Land:
-	   -name
-           -isEmpty
-	   -function
-	     Subclasses:
-		Road
-		  -monsterList
-		  -levels (level range of monsters)
-		  -chance (chance of encounters)
-		  
-		Bridge
-		  -monsterList
-		  -levels
-		  -chance (chance of encounters)
-
-		Boss
-		  -bossList
-		  -levels
-
-		Town
-		  -isFriendly
-		    Subclasses:
-
-			Townhall
-			   -mayor
-			   -implements class Quest
+	allow player to move wasd and encounter monsters 
+	incorporate Map.java and MyRPG.java functionality
+	
+2. Storyline Development (2-3 days) 
+	what's going on, why you're fighting all these monsters
+	progress through towns
+	have a final boss
 			
-			Shops
-			   -shop[x][2] (keeps track of shop item and price)
-			   -shopgen(int playerlevel, intplayergold)
-			   -shopbuy(int item)
-			   -implements class Item
-			   -id	
+Possible Detail Enchancement (?) 
+	Gold, items and Shops 
+	Geographic features (e.g. certain monsters can be seen on this type of patch, etc.) 
+	Evolution of character class 
 
-			     Subclasses:
-			      Weapon-shop
-				''-custom item list used to generate 2D array shop
-			      Armor-shop
- 				''
-			      Food-shop
-				''
-			Games(tentative)
-			
-			townPlot
-			   -just generates random dialogue from random npc
-2. Quest.java (2-3 days)
-	active
-	progression-req
-	//bunch of if statements which utilize progression-req to give quests to player
-			
 					
