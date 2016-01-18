@@ -24,3 +24,6 @@ to-do.txt updated
 1/17/16
 map movements updated 
 MyRPG changes to fit addition of map
+
+1/18/16 
+movement incorporated into MyRPG

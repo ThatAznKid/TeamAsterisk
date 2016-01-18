@@ -27,23 +27,23 @@ public class MyRPG {
 	}
     }// end printWithDelay
     
-    public void dailyLife (int choice) { 
+    public void dailyLife (String choice) { 
 	String s;
-	if (choice == 0) { 
+	if (choice.equals("!")) { 
 	    s= "Nice seeing ya around. Hope to see you again sometime."; 
 	    printWithDelay(s); 
 	}
-	else if (choice == 1) { 
+	else if (choice.equals("f")) { 
 	    fightMonster();  
 	} 
-	else if (choice == 2) { 
+	else if (choice.equals("r")) { 
 	    rest(); 
 	} 
-	else if (choice == 3) { 
+	else if (choice.equals("v")) { 
 	    viewStats(); 
 	}
-	else if (choice == 4) { 
-	    options();
+	else if (choice.equals("o")) { 
+	    options(); 
 	}	
     }//end dailyLife
 
@@ -169,6 +169,7 @@ public class MyRPG {
 	String s; 
 	String name = "";
 	int holder = -1;
+	String str = "";
 	s= "Welcome to the Stereotypical RPG!\n"; 
 	s+= "What would you like to be called?\n"; 
 	s+= "Please enter your name:\n";
@@ -196,8 +197,15 @@ public class MyRPG {
 	s= "I see...I see...\n"; 
 	s+= "Well, it appears it is time to start your adventure...\n"; 
 	s+= "So...for the time being you're in town.\n"; 
-	s+= "Remember, just use WASD to move around on the map.\n"; 
+	s+= "Remember, just use WASD to move around on the map.\n";
+	s+= "Right now, you can: \n";  
+	s+= "!. Quit game. All data will be lost.\n";
+	s+= "f. Fight some gnarly monsters!\n";  
+	s+= "r. Take a rest and restore your health\n"; 
+	s+= "v. View Inventory and Stats\n"; 
+	s+= "o. Settings/Options\n"; 
 	s+= "X will mark where you are.\n";
+	s+= "Remember, type h for help if you forget any commands.\n";
 	printWithDelay (s); 
 	if (holder == 1) { 
 	    noob = new Warrior (name); 
@@ -210,18 +218,24 @@ public class MyRPG {
 	while (holder != 0) {
 	    System.out.println(rpg);
 	    s= "Day " + noob.getDaysAlive() + " of being here, congrats.\n";
-	    s+= "Right now, you can: \n";  
-	    s+= "0. Quit game. All data will be lost.\n";
-	    s+= "1. Fight some gnarly monsters!\n";  
-	    s+= "2. Take a rest and restore your health\n"; 
-	    s+= "3. View Inventory and Stats\n"; 
-	    s+= "4. Settings/Options\n";
 	    printWithDelay(s);
 	    try {
-		holder = Integer.parseInt(in.readLine());
+		str = in.readLine();
 	    }
 	    catch ( IOException e ) { }
-	    dailyLife(holder); 
+	    dailyLife(str); 	
+	    if (str.equals("w")) { 
+		rpg.move ("w"); 
+	    }
+	    if (str.equals("a")) { 
+		rpg.move ("a"); 
+	    }
+	    if (str.equals("s")) { 
+		rpg.move ("s"); 
+	    }
+	    if (str.equals("d")) { 
+		rpg.move ("d"); 
+	    }	  
 	}
     }//end newGame 
 
