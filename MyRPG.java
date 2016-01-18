@@ -45,6 +45,9 @@ public class MyRPG {
 	else if (choice.equals("o")) { 
 	    options(); 
 	}	
+	else if (choice.equals("h")) { 
+	    help(); 
+	}
     }//end dailyLife
 
     //dailyLife option 1
@@ -160,6 +163,19 @@ public class MyRPG {
 	} 
     }
 
+    //dailyLife5 
+    public void help () { 
+	String s;
+	s= "Remember, just use WASD to move around on the map.\n";
+	s+= "Right now, you can: \n";  
+	s+= "!. Quit game. All data will be lost.\n";
+	s+= "f. Fight some gnarly monsters!\n";  
+	s+= "r. Take a rest and restore your health\n"; 
+	s+= "v. View Inventory and Stats\n"; 
+	s+= "o. Settings/Options\n"; 
+	s+= "X will mark where you are.\n";
+	printWithDelay(s); 
+    }
 	//let's begin
     public void newGame() { 
 
