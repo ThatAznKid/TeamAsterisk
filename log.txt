@@ -1,22 +1,26 @@
-1/8/15 
+1/8/16 
 started work on Map.java 
 resolved issues 
 
-1/10/15 
+1/10/16 
 brought in MyRPG files 
 brought up issue about work 
 working version uploaded, details yet to be sorted (check issue)
 
-1/11/15
+1/11/16
 readme.txt created 
 
-1/12/15 
+1/12/16 
 driver uploaded to github
 option given to change amt of text delay
 
-1/13/15
+1/13/16
 Map.java updated with new fixed map.
 
 1/14/16
 to-do.txt created
 to-do.txt updated
+
+1/17/16
+map movements updated 
+MyRPG changes to fit addition of map

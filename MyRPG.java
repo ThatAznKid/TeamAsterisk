@@ -165,6 +165,7 @@ public class MyRPG {
 
 	//starting a new game... 
 	//let's get that name of yours...
+	Map rpg = new Map();
 	String s; 
 	String name = "";
 	int holder = -1;
@@ -195,6 +196,8 @@ public class MyRPG {
 	s= "I see...I see...\n"; 
 	s+= "Well, it appears it is time to start your adventure...\n"; 
 	s+= "So...for the time being you're in town.\n"; 
+	s+= "Remember, just use WASD to move around on the map.\n"; 
+	s+= "X will mark where you are.\n";
 	printWithDelay (s); 
 	if (holder == 1) { 
 	    noob = new Warrior (name); 
@@ -205,6 +208,7 @@ public class MyRPG {
 
 	//story time 
 	while (holder != 0) {
+	    System.out.println(rpg);
 	    s= "Day " + noob.getDaysAlive() + " of being here, congrats.\n";
 	    s+= "Right now, you can: \n";  
 	    s+= "0. Quit game. All data will be lost.\n";
