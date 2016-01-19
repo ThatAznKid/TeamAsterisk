@@ -17,6 +17,7 @@ public class Map {
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"},
 					    {"o","R","o","+","+","=","=","+","+","o","C","o"},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"}};
+    private static Tile[12][12] _mop;	
     private int xcord;
     private int ycord;
     
