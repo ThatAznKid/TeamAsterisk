@@ -30,8 +30,9 @@ public class MyRPG {
     public void dailyLife (String choice) { 
 	String s;
 	if (choice.equals("!")) { 
-	    s= "Nice seeing ya around. Hope to see you again sometime."; 
-	    printWithDelay(s); 
+	    s= "Nice seeing ya around. Hope to see you again sometime.\n"; 
+	    printWithDelay(s);
+	    System.exit(0); 
 	}
 	else if (choice.equals("f")) { 
 	    fightMonster();  
