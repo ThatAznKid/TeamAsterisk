@@ -4,6 +4,10 @@ To-do list
 	allow player to move wasd and encounter monsters 
 	incorporate Map.java and MyRPG.java functionality
 	
+1.5. **error handling 
+       gold/level scaling
+       implementation of shops
+
 2. Storyline Development (2-3 days) 
 	what's going on, why you're fighting all these monsters
 	progress through towns
