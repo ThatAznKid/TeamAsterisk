@@ -17,7 +17,7 @@ public class Map {
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"},
 					    {"o","R","o","+","+","=","=","+","+","o","C","o"},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"}};
-    private static Tile[12][12] _mop;	
+    private Tile[][] _mop = new Tile[12][12] ;	
     private int xcord;
     private int ycord;
     
@@ -26,6 +26,12 @@ public class Map {
     	in = new BufferedReader( isr );
 	xcord = 0;
 	ycord = 0;
+	
+	for (int x = 0; x < _mop.length; x++) { 
+	    for (int y = 0; y < _mop[x].length; y++) {
+	        _mop[x][y] = new Tile(_map[x][y]);
+	    }
+	}
     }
 
     public String toString() {
