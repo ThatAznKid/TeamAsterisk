@@ -44,8 +44,6 @@ public abstract class Character {
     public int attack( Character opponent ) {
 
 	int damage =  _Bstrength - opponent.getDefense();
-	//System.out.println( "\t\t**DIAG** damage: " + damage );
-
 	if ( damage <= 0 )
 	    damage = 1;
 	opponent.lowerHP( damage );

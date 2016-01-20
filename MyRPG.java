@@ -12,7 +12,7 @@ public class MyRPG {
     public MyRPG () { 
     	isr = new InputStreamReader( System.in );
     	in = new BufferedReader( isr );
-	delay = 0;
+	delay = 25;
     	newGame (); 
     }
     
