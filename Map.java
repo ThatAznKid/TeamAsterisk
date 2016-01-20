@@ -29,7 +29,19 @@ public class Map {
 	
 	for (int x = 0; x < _mop.length; x++) { 
 	    for (int y = 0; y < _mop[x].length; y++) {
-	        _mop[x][y] = new Tile(_map[x][y]);
+	        if (key.equals("o") || key.equals("T") || key.equals("R") || key.equals("A") || key.equals("C")){
+		    _mop[x][y] = new Town(_map[x][y]);
+		}
+		if (key.equals("+")){
+		    _mop[x][y] = new Road(_map[x][y]);
+		}
+		if (key.equals("=") || key.equals("|")){
+		    _mop[x][y] = new Bridge(_map[x][y]);
+		}
+		if(key.equals("B")){
+		    _mop[x][y] = new Boss(_map[x][y]);
+		}
+		_mop[x][y] = new Blank(_map[x][y]);
 	    }
 	}
     }
