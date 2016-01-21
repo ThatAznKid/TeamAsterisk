@@ -26,39 +26,59 @@ public class Map {
     	in = new BufferedReader( isr );
 	xcord = 0;
 	ycord = 0;
+	int ctr = 1;
 	
-	for (int x = 0; x < _mop.length; x++) { 
-	    for (int y = 0; y < _mop[x].length; y++) {
+	for (int y = 0; y < _mop.length; y++) { 
+	    for (int x = 0; x < _mop[y].length; x++) {
+		Object key = _map[y][x];
 	        if (key.equals("o") || key.equals("T") || key.equals("R") || key.equals("A") || key.equals("C")){
-		    _mop[x][y] = new Town(_map[x][y]);
+		    _mop[y][x] = new Town(townDef(x,y), ctr);
+		    ctr += 1;
 		}
 		if (key.equals("+")){
-		    _mop[x][y] = new Road(_map[x][y]);
+		    _mop[y][x] = new Road();
 		}
 		if (key.equals("=") || key.equals("|")){
-		    _mop[x][y] = new Bridge(_map[x][y]);
+		    _mop[y][x] = new Bridge();
 		}
 		if(key.equals("B")){
-		    _mop[x][y] = new Boss(_map[x][y]);
+		   _mop[y][x] = new Boss();
 		}
-		_mop[x][y] = new Blank(_map[x][y]);
+		_mop[y][x] = new Blank();
 	    }
 	}
     }
 
     public String toString() {
 	String s = "";
-	for (int x = 0; x < _map.length; x++) { 
-	    for (int y = 0; y < _map[x].length; y++) {
-		if (x == ycord && y == xcord){
+	for (int y = 0; y < _map.length; y++) { 
+	    for (int x = 0; x < _map[y].length; x++) {
+		if (y == ycord && x == xcord){
 		    s += " x ";
 		}
-		else s += " " + _map[x][y] + " "; 
+		else s += " " + _map[y][x] + " "; 
 	    }
 	    s+="\n";
 	}
 	return s;
     }
+
+    public String townDef(int x, int y){
+	if (x < 3 && y < 3) {
+	    return "Dragnok";
+	}
+	if (x > 9 && y < 3) {
+	    return "Yeevile";
+        }
+	if (x < 3 && y > 9) {
+	    return "Cernar";
+	}
+	if (x > 9 && y > 9) {
+	    return "Wayner";
+	}
+	return "";
+    }
+
     
     //accessors and mutators for x and y
     public int getx() {
