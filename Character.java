@@ -8,6 +8,8 @@ public abstract class Character {
     protected int _daysAlive;
     protected int _level; 
     protected int _Bstrength; 
+    protected int Talisman; 
+    protected int Shield; 
 
     public Character() {
 	_hitPts = 1;
@@ -17,6 +19,8 @@ public abstract class Character {
 	_origHitPts = _hitPts; 
 	_daysAlive = 0; 
 	_level = 1;
+	Talisman = 0; 
+	Shield = 0;
     }
 
      public void printWithDelay (String s) { 
@@ -41,15 +45,7 @@ public abstract class Character {
 	return _hitPts > 0;
     }
 
-    public int attack( Character opponent ) {
-
-	int damage =  _Bstrength - opponent.getDefense();
-	if ( damage <= 0 )
-	    damage = 1;
-	opponent.lowerHP( damage );
-
-	return damage;
-    }//end attack
+    public abstract int attack( Character opponent );//end attack
 
     public void lowerHP( int damageInflicted ) {
 	_hitPts = _hitPts - damageInflicted;
@@ -141,4 +137,10 @@ public abstract class Character {
 	return _EXP;
     } 
 
+    public int getShield() { 
+	return Shield; 
+    } 
+    public int getTalisman() { 
+	return Talisman; 
+    }
 }//end class Character

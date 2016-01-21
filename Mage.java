@@ -33,6 +33,17 @@ public class Mage extends Character {
 	return s;
     }
 
+     public int attack ( Character opponent ) { 
+	int holder = opponent.getTalisman();
+	double modifier = 1 - ( holder / ( 50 + holder ));
+	int damage = (int) (modifier * _strength); 
+	if (damage < 0) { 
+	    damage = 1; 
+	} 
+	opponent.lowerHP (damage); 
+	return damage; 
+    }
+
     public String about(){
 	String s = "";
 	s += "MAGE: \n";
