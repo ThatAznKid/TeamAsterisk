@@ -94,9 +94,12 @@ public class MyRPG {
 	    } 
 	    else if (noob.isAlive() && !weewoo.isAlive()) {  
 		int placeholder = weewoo.expWorth();
+		int placeholder2 = weewoo.goldWorth();
 		s= "You seem to have killed the guy. Great job!\n"; 
 		s+= "You gained " + placeholder + " EXP!\n"; 
+		s+= "You also gained " + placeholder2 + " gold!\n";
 		noob.gainEXP (placeholder);  
+		noob.gainGold (placeholder2);
 		printWithDelay(s); 
 		noob.levelUp();
 		s= "Time to return to town.\n"; 
@@ -127,12 +130,12 @@ public class MyRPG {
     public void viewStats() { 
 	String s; 
 	s= "Level: " + noob.getLevel()+"\n"; 
-	s+= "EXP: " + noob.getEXP()+"\n";  
-	s+= "EXP needed to level up: " + (noob.getLevel() * (10 + noob.getLevel())) +"\n"; 
+	s+= "EXP needed to level up: " + (noob.getLevel() * 10 + 200) +"\n"; 
 	s+= "Current HP: " + noob.getHealth()+"\n"; 
 	s+= "Total HP: " + noob.getOrigHitPts()+"\n"; 
 	s+= "Attack Power: " + noob.getStrength()+"\n"; 
 	s+= "Defense: " + noob.getDefense()+"\n";
+	s+= "Gold: " + noob.getGold() + "\n";
 	printWithDelay (s);
     }//end viewStats 
 

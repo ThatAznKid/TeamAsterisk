@@ -6,7 +6,9 @@ public class Monster extends Character {
 	_strength = 1;
 	_defense = 1;
 	Talisman = 0; 
-	Shield = 0;
+	Shield = 0; 
+	_level = 1;
+	_name = "Slime";
     }
 
     public String moveSet(){
@@ -26,10 +28,6 @@ public class Monster extends Character {
         return "";
     }
 
-    public int expWorth () { 
-	return ((int) (Math.random() * 5)); 
-    }
-    
     public int attack ( Character opponent ) { 
 	int holder = opponent.getShield();
 	double modifier = 1 - ( holder / ( 50 + holder ));

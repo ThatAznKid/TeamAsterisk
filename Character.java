@@ -10,6 +10,8 @@ public abstract class Character {
     protected int _Bstrength; 
     protected int Talisman; 
     protected int Shield; 
+    protected int gold;
+    protected String _name;
 
     public Character() {
 	_hitPts = 1;
@@ -61,7 +63,7 @@ public abstract class Character {
     public abstract String moveSet();
 
     public String getName(){
-	return "???";
+	return _name;
     }
 
     public void daysAliveIncrement () { 
@@ -111,7 +113,8 @@ public abstract class Character {
     } 
 
     public void levelUp () { 
-	if ((_level * (10 + _level)) < _EXP) { 
+	if ( ( 10 * _level + 200 ) < _EXP) { 
+	    _EXP -= (10 * _level + 200);
 	    _level += 1;  
 	    String s;  
 	    int h1,h2,h3;
@@ -143,4 +146,21 @@ public abstract class Character {
     public int getTalisman() { 
 	return Talisman; 
     }
+    
+    public int expWorth () { 
+	return (50 + (_level ^ 10) + ((int) (_level * Math.random()))); 
+    }
+
+    public int goldWorth () { 
+	return (50 + (_level ^ 10) + ((int) (_level * Math.random()))); 
+    }
+    
+    public int getGold () { 
+	return gold; 
+    }
+    
+    public void gainGold(int gain) { 
+	gold += gold + gain; 
+    }
+
 }//end class Character
