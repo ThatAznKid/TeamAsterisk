@@ -249,7 +249,7 @@ public class MyRPG {
 	printWithDelay (s); 
 
 	//story time 
-	while (holder != 0) {
+        for ( ; ; ) {
 	    System.out.println(rpg);
 	    s= "Day " + noob.getDaysAlive() + " of being here, congrats.\n";
 	    printWithDelay(s);
