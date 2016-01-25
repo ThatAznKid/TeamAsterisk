@@ -12,7 +12,7 @@ public class MyRPG {
     public MyRPG () { 
     	isr = new InputStreamReader( System.in );
     	in = new BufferedReader( isr );
-	delay = 25;
+	delay = 25; //0 for testing, 25 for general users
     	newGame (); 
     }
     
@@ -59,17 +59,15 @@ public class MyRPG {
 	weewoo = new Monster(); 
 	while (weewoo.isAlive() && noob.isAlive()) { 
 	    //hit 'em with a splash attack 
-	    try { 
-		s= "You've encountered a monster!\n"; 
-		s+= "What will you do?\n"; 
-		s+= noob.getName() + " has " + noob.getHealth() + " hitpoints left.\n";
-		s+= weewoo.getName() + " has " + weewoo.getHealth() + " hitpoints left.\n";
-		s+= noob.moveSet();   
-		printWithDelay(s); 
-		holder = Integer.parseInt (in.readLine()); 
-	    } 
-	    catch ( IOException e ) { } 
-	    
+
+	    s= "You've encountered a monster!\n"; 
+	    s+= "What will you do?\n"; 
+	    s+= noob.getName() + " has " + noob.getHealth() + " hitpoints left.\n";
+	    s+= weewoo.getName() + " has " + weewoo.getHealth() + " hitpoints left.\n";
+	    s+= noob.moveSet();   
+	    printWithDelay(s); 
+	    holder = errorHandlerInt(2); 
+	  
 	    //what do? 
 	    if (holder == 2) { 
 		noob.specialize(); 
@@ -180,7 +178,27 @@ public class MyRPG {
 	s+= "X will mark where you are.\n";
 	printWithDelay(s); 
     }
-	//let's begin
+	
+    //error handling for int inputs
+    public int errorHandlerInt (int range) { 
+	boolean isGood = false;
+	int holder = 100;
+	while (isGood == false) {
+	    try {
+		holder = Integer.parseInt(in.readLine());
+	    }
+	    catch ( IOException e ) { } 
+	    catch ( NumberFormatException e ) { 
+		printWithDelay ("That doesn't seem to be a valid input. Try again.\n"); 
+	    } 
+	    if (holder <= range) { 
+		isGood = true; 
+	    } 
+	}
+	return holder;
+    }
+
+    //let's begin
     public void newGame() { 
 
 	//starting a new game... 
@@ -208,11 +226,13 @@ public class MyRPG {
 	s+= "1. Warrior\n"; 
 	s+= "2. Mage\n"; 
 	printWithDelay (s); 
-	try {
-	    holder = Integer.parseInt(in.readLine());
-	}
-	catch ( IOException e ) { }
-
+	holder = errorHandlerInt(2);
+	if (holder == 1) { 
+	    noob = new Warrior (name); 
+	} 
+	else { 
+	    noob = new Mage(name); 
+	}  
 	//time to begin? initialize a new one
 	s= "I see...I see...\n"; 
 	s+= "Well, it appears it is time to start your adventure...\n"; 
@@ -227,12 +247,6 @@ public class MyRPG {
 	s+= "X will mark where you are.\n";
 	s+= "Remember, type h for help if you forget any commands.\n";
 	printWithDelay (s); 
-	if (holder == 1) { 
-	    noob = new Warrior (name); 
-	} 
-	else { 
-	    noob = new Mage(name); 
-	} 
 
 	//story time 
 	while (holder != 0) {

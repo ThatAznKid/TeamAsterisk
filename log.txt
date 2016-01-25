@@ -27,3 +27,15 @@ MyRPG changes to fit addition of map
 
 1/18/16 
 movement incorporated into MyRPG
+
+1/20/16 
+new geographic features started 
+
+1/22/16 
+gold implemented
+work on inventory system begun 
+
+1/24/16 
+error handling should be good for the game 
+(one bad input will not crash your game! :)) 
+*needs to be completely tested for holes
