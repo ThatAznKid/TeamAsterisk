@@ -78,6 +78,22 @@ public class Map {
 	}
 	return "transition between towns.";
     } 
+
+    public String townD(int x, int y){
+	if (x < 3 && y < 3) {
+	    return "Dragnok";
+	}
+	if (x > 8 && y < 3) {
+	    return "Yeevile";
+        }
+	if (x < 3 && y > 8) {
+	    return "Cernar";
+	}
+	if (x > 8 && y > 8) {
+	    return "Wayner";
+	}
+	return "";
+    }
     
     public int monsterDeterminer (int x, int y) {
 	int holder = -1;
