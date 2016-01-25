@@ -41,9 +41,6 @@ public class Map {
 		if (key.equals("=") || key.equals("|")){
 		    _mop[y][x] = new Bridge();
 		}
-		if(key.equals("B")){
-		   _mop[y][x] = new Boss();
-		}
 		_mop[y][x] = new Blank();
 	    }
 	}
@@ -65,19 +62,22 @@ public class Map {
 
     public String townDef(int x, int y){
 	if (x < 3 && y < 3) {
-	    return "Dragnok";
+	    return "Dragnok, the first town.";
 	}
 	if (x > 8 && y < 3) {
-	    return "Yeevile";
+	    return "Yeevile, the second town.";
         }
 	if (x < 3 && y > 8) {
-	    return "Cernar";
+	    return "Cernar, the third town.";
 	}
 	if (x > 8 && y > 8) {
-	    return "Wayner";
+	    return "Wayner, the fourth and final town.";
 	}
-	return "null";
-     } 
+	if (x == 5 && y == 3) { 
+	    return "the very heart of the mountain. You feel goosebumps as you realize someone (or something...) is rapidly approaching..."; 
+	}
+	return "transition between towns.";
+    } 
     
     public int monsterDeterminer (int x, int y) {
 	int holder = -1;
@@ -94,7 +94,7 @@ public class Map {
 	    holder = 4;
 	}
 	if (x == 5 && y == 3) { 
-	    holder =9000; 
+	    holder = 9000; 
 	}
 	return holder;
     }

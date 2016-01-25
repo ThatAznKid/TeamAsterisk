@@ -1,13 +1,13 @@
-public class Boss extends Character {
+public class Monster2 extends Character {
 
-    public Boss() {
+    public Monster2() {
 	super();
-	_hitPts = 75;
-	_strength = 25;
-	Talisman = 22; 
-	Shield = 22; 
-	_level = 25;
-	_name = "Dark Arcane Magician";
+	_hitPts = 18;
+	_strength = 9;
+	Talisman = 5; 
+	Shield = 5; 
+	_level = 7;
+	_name = "Rabid Wolf";
     }
 
     public String moveSet(){
@@ -15,10 +15,6 @@ public class Boss extends Character {
     }
     
     public void normalize(){
-    }
-    
-    public String toString(){
-    	return "in the very heart of the mountain. You feel goosebumps as you realize someone (or something...) is rapidly approaching...";
     }
 
     public void specialize(){
@@ -42,6 +38,6 @@ public class Boss extends Character {
 	return damage; 
     }
 
-}//end class Boss
+}//end class Monster2
 
-
+    
