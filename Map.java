@@ -151,7 +151,26 @@ public class Map {
 	    else setx(xcord + 1);
 	}
     }
-	
+ 
+    public void barrier (int level) { 
+	_map [1][3] = "+"; 
+	_map [3][10] = "+"; 
+        _map [10][8] = "+"; 
+	_map [8][1] = "+";
+	if (level < 5) { 
+	    _map [1][3] = " "; 
+	}
+	if (level < 10) { 
+	    _map [3][10] = " "; 
+	}
+	if (level < 15) { 
+	    _map [10][8] = " "; 
+	}
+	if (level < 20) { 
+	    _map [8][1] = " "; 
+	}
+    }
+	    
 
     public static void main(String[] args){
 	Map test = new Map();
