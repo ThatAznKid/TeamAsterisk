@@ -167,6 +167,7 @@ public class Inventory{
         while (o != -10){
         System.out.println("\n" + this);
         System.out.println("Which item slot would you like to empty? (0 - 8) | -10 if done.");
+        if (o == -10){break;}
         try {
 	        o = Integer.parseInt(in.readLine());
 	        }
@@ -204,6 +205,7 @@ public class Inventory{
         while (eq != -10){
         System.out.println("\n" + this);
         System.out.println("Which item would you like to equip? (0 - 8) | -10 if done.");
+        if (eq == -10){break;}
         try {
 	        eq = Integer.parseInt(in.readLine());
 	        }
@@ -240,6 +242,7 @@ public class Inventory{
         while (v != -10){
         System.out.println("\n" + this);
         System.out.println("Which item would you like to view? (0 - 8) | -10 if done.");
+        if (v == -10){break;}
         try {
 	        v = Integer.parseInt(in.readLine());
 	        }
@@ -273,6 +276,7 @@ public class Inventory{
         while (s != -10){
         System.out.println("\n" + this);
         System.out.println("Which item slot would you like to sell? (0 - 8) | -10 if done.");
+        if (s == -10){break;}
         try {
 	        s = Integer.parseInt(in.readLine());
 	        }
