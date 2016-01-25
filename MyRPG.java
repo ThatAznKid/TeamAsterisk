@@ -12,7 +12,7 @@ public class MyRPG {
     public MyRPG () { 
     	isr = new InputStreamReader( System.in );
     	in = new BufferedReader( isr );
-	delay = 0; //0 for testing, 25 for general users
+	delay = 25; //0 for testing, 25 for general users
     	newGame (); 
     }
     
@@ -201,6 +201,7 @@ public class MyRPG {
 	s+= "r. Take a rest and restore your health\n"; 
 	s+= "v. View Inventory and Stats\n"; 
 	s+= "o. Settings/Options\n"; 
+	s+= "i. Check your inventory\n";
 	s+= "X will mark where you are.\n";
 	s+= "There is a large chance of encountering a monster with every step you take.";
 	printWithDelay(s); 
@@ -231,6 +232,7 @@ public class MyRPG {
 	//starting a new game... 
 	//let's get that name of yours...
 	Map rpg = new Map();
+	Inventory inv = new Inventory();
 	String s; 
 	String name = "";
 	int holder = -1;
@@ -273,6 +275,7 @@ public class MyRPG {
 	s+= "r. Take a rest and restore your health\n"; 
 	s+= "v. View Inventory and Stats\n"; 
 	s+= "o. Settings/Options\n"; 
+	s+= "i. Check your inventory\n";
 	s+= "X will mark where you are.\n";
 	s+= "Remember, type h for help if you forget any commands.\n";
 	printWithDelay (s); 
@@ -287,7 +290,10 @@ public class MyRPG {
 		str = in.readLine();
 	    }
 	    catch ( IOException e ) { }
-	    dailyLife(str); 	
+	    dailyLife(str); 
+	    if (str.equals("i")) { 
+		//Inventory.interact(noob.getLevel(),noob.getGold(),townD(rpg.getx(),rpg.gety())); 
+	    }
 	    if (str.equals("w")) { 
 		rpg.move ("w"); 
 	    }
