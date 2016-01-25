@@ -154,7 +154,7 @@ public class MyRPG {
     public void viewStats() { 
 	String s; 
 	s= "Level: " + noob.getLevel()+"\n"; 
-	s+= "EXP needed to level up: " + (noob.getLevel() * 10 + 200) +"\n"; 
+	s+= "EXP needed to level up: " + (noob.getLevel() * 60 - noob.getEXP() ) +"\n"; 
 	s+= "Current HP: " + noob.getHealth()+"\n"; 
 	s+= "Total HP: " + noob.getOrigHitPts()+"\n"; 
 	s+= "Attack Power: " + noob.getStrength()+"\n"; 
