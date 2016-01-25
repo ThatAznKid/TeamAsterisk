@@ -12,7 +12,7 @@ public class MyRPG {
     public MyRPG () { 
     	isr = new InputStreamReader( System.in );
     	in = new BufferedReader( isr );
-	delay = 25; //0 for testing, 25 for general users
+	delay = 0; //0 for testing, 25 for general users
     	newGame (); 
     }
     
@@ -34,9 +34,6 @@ public class MyRPG {
 	    printWithDelay(s);
 	    System.exit(0); 
 	}
-	else if (choice.equals("f")) { 
-	    fightMonster();  
-	} 
 	else if (choice.equals("r")) { 
 	    rest(); 
 	} 
@@ -52,10 +49,11 @@ public class MyRPG {
     }//end dailyLife
 
     //dailyLife option 1
-    public void fightMonster () { 
+    public void fightMonster (int difficulty) { 
 	String s;
 	int holder = -1; 
 	int damage1, damage2;
+	holder = difficulty; 
 	weewoo = new Monster(); 
 	while (weewoo.isAlive() && noob.isAlive()) { 
 	    //hit 'em with a splash attack 
@@ -87,7 +85,8 @@ public class MyRPG {
 	    //still alive and kicking? 
 	    if (!noob.isAlive() && weewoo.isAlive()) { 
 		s= "You seem to have gotten knocked out cold.\n"; 
-		s+= "Back to the town we go...\n"; 
+		s+= "Back to the field we go...\n"; 
+		s+= "I think you lost some gold, while you were out cold...";
 		printWithDelay(s); 
 	    } 
 	    else if (noob.isAlive() && !weewoo.isAlive()) {  
@@ -100,15 +99,16 @@ public class MyRPG {
 		noob.gainGold (placeholder2);
 		printWithDelay(s); 
 		noob.levelUp();
-		s= "Time to return to town.\n"; 
+		s= "Back to the field we go.\n"; 
 		printWithDelay(s);
 	    } 
 	    else if (!noob.isAlive() && !weewoo.isAlive()){ 
 		s= "I guess both of you killed each other simultaneously somehow...\n";
 		s+= "That's cool..."; 
 		s+= "Wonder if it was like an anime scene...\n"; 
-		s+= "Ahem. Back to the town we go.\n"; 
-		s+= "Don't think you're getting any gold or exp for this.\n"; 
+		s+= "Ahem. Back to the field we go.\n"; 
+		s+= "Don't think you're getting any gold or exp for this.\n";
+		s+= "You do seem strangely resilient, however...Didn't you die just now? Whatever, I do think you lost some gold, though.";
 		printWithDelay(s); 
 	    }
 	}
@@ -176,6 +176,7 @@ public class MyRPG {
 	s+= "v. View Inventory and Stats\n"; 
 	s+= "o. Settings/Options\n"; 
 	s+= "X will mark where you are.\n";
+	s+= "There is a large chance of encountering a monster with every step you take.";
 	printWithDelay(s); 
     }
 	
@@ -236,7 +237,8 @@ public class MyRPG {
 	//time to begin? initialize a new one
 	s= "I see...I see...\n"; 
 	s+= "Well, it appears it is time to start your adventure...\n"; 
-	s+= "So...for the time being you're in town.\n"; 
+	s+= "So...for the time being you're in the first town, Dragnok.\n"; 
+	s+= "Recently, there's been a large infestation of monsters in every town, and we think the source is coming from the mountain in the middle. Please, we need your help! Stop the source of these irregularities!";
 	s+= "Remember, just use WASD to move around on the map.\n";
 	s+= "Right now, you can: \n";  
 	s+= "!. Quit game. All data will be lost.\n";
@@ -252,6 +254,7 @@ public class MyRPG {
         for ( ; ; ) {
 	    System.out.println(rpg);
 	    s= "Day " + noob.getDaysAlive() + " of being here, congrats.\n";
+	    s+= "Right now, you are in " + rpg.townDef(rpg.getx(),rpg.gety()) + "\n";
 	    printWithDelay(s);
 	    try {
 		str = in.readLine();
@@ -269,7 +272,11 @@ public class MyRPG {
 	    }
 	    if (str.equals("d")) { 
 		rpg.move ("d"); 
-	    }	  
+	    }	
+	    holder = ((int) (Math.random ()*10));
+	    if (3 > holder) { 
+		fightMonster(rpg.monsterDeterminer(rpg.getx(),rpg.gety())); 
+	    }
 	}
     }//end newGame 
 

@@ -6,7 +6,7 @@ public class Map {
     private static BufferedReader in;
     
     private static final Object[][] _map = {{"o","o","o"," "," "," "," "," "," ","o","o","o"},
-					    {"o","T","o","+","+","=","=","+","+","o","A","o"},
+					    {"o","D","o","+","+","=","=","+","+","o","Y","o"},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"},
 					    {" "," "," "," "," ","B","=","+"," "," ","+"," "},
 					    {" "," "," "," "," "," "," ","|"," "," ","|"," "},
@@ -15,7 +15,7 @@ public class Map {
 					    {" ","+"," "," ","+","=","+"," "," "," ","+"," "},
 					    {" ","+"," "," "," "," "," "," "," "," ","+"," "},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"},
-					    {"o","R","o","+","+","=","=","+","+","o","C","o"},
+					    {"o","W","o","+","+","=","=","+","+","o","C","o"},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"}};
     private Tile[][] _mop = new Tile[12][12] ;	
     private int xcord;
@@ -65,21 +65,43 @@ public class Map {
 
     public String townDef(int x, int y){
 	if (x < 3 && y < 3) {
-	    return "Dragnok";
+	    return "Dragnok, the first town.";
 	}
-	if (x > 9 && y < 3) {
-	    return "Yeevile";
+	if (x > 8 && y < 3) {
+	    return "Yeevile, the second town.";
         }
-	if (x < 3 && y > 9) {
-	    return "Cernar";
+	if (x < 3 && y > 8) {
+	    return "Cernar, the third town.";
 	}
-	if (x > 9 && y > 9) {
-	    return "Wayner";
+	if (x > 8 && y > 8) {
+	    return "Wayner, the fourth and final town.";
 	}
-	return "";
+	if (x == 5 && y == 3) { 
+	    return "the very heart of the mountain. You feel goosebumps as you realize someone (or something...) is rapidly approaching..."; 
+	}
+	return "transition between towns.";
+    } 
+    
+    public int monsterDeterminer (int x, int y) {
+	int holder = -1;
+	if (x < 3 && y < 3) {
+	    holder = 1;
+	}
+	if (x > 8 && y < 3) {
+	    holder = 2;
+        }
+	if (x < 3 && y > 8) {
+	    holder = 3;
+	}
+	if (x > 8 && y > 8) {
+	    holder = 4;
+	}
+	if (x == 5 && y == 3) { 
+	    holder =9000; 
+	}
+	return holder;
     }
 
-    
     //accessors and mutators for x and y
     public int getx() {
 	return xcord;
