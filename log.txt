@@ -39,3 +39,5 @@ work on inventory system begun
 error handling should be good for the game 
 (one bad input will not crash your game! :)) 
 *needs to be completely tested for holes
+all new monsters added 
+barriers added
