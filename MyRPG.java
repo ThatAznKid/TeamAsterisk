@@ -265,6 +265,7 @@ public class MyRPG {
 	s+= "Well, it appears it is time to start your adventure...\n"; 
 	s+= "So...for the time being you're in the first town, Dragnok.\n"; 
 	s+= "Recently, there's been a large infestation of monsters in every town, and we think the source is coming from the mountain in the middle. Please, we need your help! Stop the source of these irregularities!";
+	s+= "You will not being able to progress from town to town until you hit a certain level. You must be level 5 to access the second town, level 10 to access the third town and so on. The bridges will appear when you are of level.\n";
 	s+= "Remember, just use WASD to move around on the map.\n";
 	s+= "Right now, you can: \n";  
 	s+= "!. Quit game. All data will be lost.\n";
@@ -299,6 +300,7 @@ public class MyRPG {
 	    if (str.equals("d")) { 
 		rpg.move ("d"); 
 	    }	
+	    rpg.barrier(noob.getLevel());
 	    holder = ((int) (Math.random ()*10));
 	    if (3 > holder) { 
 		fightMonster(rpg.monsterDeterminer(rpg.getx(),rpg.gety())); 
