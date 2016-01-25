@@ -67,10 +67,10 @@ public class Map {
 	if (x > 8 && y < 3) {
 	    return "Yeevile, the second town.";
         }
-	if (x < 3 && y > 8) {
+	if (x > 8 && y > 8) {
 	    return "Cernar, the third town.";
 	}
-	if (x > 8 && y > 8) {
+	if (x < 3 && y > 8) {
 	    return "Wayner, the fourth and final town.";
 	}
 	if (x == 5 && y == 3) { 
@@ -84,14 +84,26 @@ public class Map {
 	if (x < 3 && y < 3) {
 	    holder = 1;
 	}
+	if (x > 2 && x < 9 && y == 1) { 
+	    holder = 5; 
+	} 
 	if (x > 8 && y < 3) {
 	    holder = 2;
         }
-	if (x < 3 && y > 8) {
-	    holder = 3;
+	if (x == 1 && y > 2 && y < 9) { 
+	    holder = 6; 
 	}
 	if (x > 8 && y > 8) {
+	    holder = 3;
+	}
+	if (x > 2 && x < 9 && y == 10) { 
+	    holder = 7; 
+	} 
+	if (x < 3 && y > 8) {
 	    holder = 4;
+	}
+	if (x > 0 && x < 8 && y > 2 && y < 9) { 
+	    holder = 8; 
 	}
 	if (x == 5 && y == 3) { 
 	    holder = 9000; 
@@ -142,16 +154,16 @@ public class Map {
 	
 
     public static void main(String[] args){
-    Map test = new Map();
-    String holder = "";
-    while (holder != "EXIT"){
-	System.out.println(test);
-	try {
-	    holder = in.readLine();
+	Map test = new Map();
+	String holder = "";
+	while (holder != "EXIT"){
+	    System.out.println(test);
+	    try {
+		holder = in.readLine();
+	    }
+	    catch ( IOException e ){ }
+	    test.move(holder);
 	}
-	catch ( IOException e ){ }
-	test.move(holder);
-    }
     }
 
 }//end map

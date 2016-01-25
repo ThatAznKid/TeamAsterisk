@@ -1,13 +1,13 @@
-public class Monster4 extends Character {
+public class Monster8 extends Character {
 
-    public Monster4() {
+    public Monster8() {
 	super();
-	_hitPts = 44;
-	_strength = 19;
-	Talisman = 15; 
-	Shield = 15; 
-	_level = 17;
-	_name = "Bloodred Wyvern";
+	_hitPts = 55;
+	_strength = 25;
+	Talisman = 20; 
+	Shield = 20; 
+	_level = 20;
+	_name = "Ragged Dragon";
     }
 
     public String moveSet(){
@@ -38,6 +38,8 @@ public class Monster4 extends Character {
 	return damage; 
     }
 
-}//end class Monster4
+}//end class Monster8
 
 
+
+    
