@@ -201,6 +201,7 @@ public class MyRPG {
 	s+= "r. Take a rest and restore your health\n"; 
 	s+= "v. View Inventory and Stats\n"; 
 	s+= "o. Settings/Options\n"; 
+	s+= "i. Check your inventory\n";
 	s+= "X will mark where you are.\n";
 	s+= "There is a large chance of encountering a monster with every step you take.";
 	printWithDelay(s); 
@@ -291,7 +292,7 @@ public class MyRPG {
 	    catch ( IOException e ) { }
 	    dailyLife(str); 
 	    if (str.equals("i")) { 
-		Inventory.interact(); 
+		//Inventory.interact(noob.getLevel(),noob.getGold(),townD(rpg.getx(),rpg.gety())); 
 	    }
 	    if (str.equals("w")) { 
 		rpg.move ("w"); 
