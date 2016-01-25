@@ -3,8 +3,8 @@ public class Mage extends Character {
     private String _name = "J. Doe"; 
    
     public Mage() {
-	_hitPts = 10;
-	_strength = 5;
+	_hitPts = 99999;
+	_strength = 99999;
 	_defense = 0; 
 	_EXP = 0;
 	_daysAlive = 0; 

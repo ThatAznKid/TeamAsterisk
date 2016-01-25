@@ -66,6 +66,18 @@ public class MyRPG {
 	if (holder == 4) { 
 	    weewoo = new Monster4(); 
 	} 
+	if (holder == 5) { 
+	    weewoo = new Monster5(); 
+	}
+	if (holder == 6) { 
+	    weewoo = new Monster6(); 
+	}
+	if (holder == 7) { 
+	    weewoo = new Monster7(); 
+	}
+	if (holder == 8) { 
+	    weewoo = new Monster8(); 
+	}
 	if (holder == 9000) { 
 	    weewoo = new Boss(); 
 	} 
