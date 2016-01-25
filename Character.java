@@ -113,8 +113,8 @@ public abstract class Character {
     } 
 
     public void levelUp () { 
-	if ( ( 10 * _level + 200 ) < _EXP) { 
-	    _EXP -= (10 * _level + 200);
+	if ( (_level * 60) < _EXP) { 
+	    _EXP -= (60 * _level);
 	    _level += 1;  
 	    String s;  
 	    int h1,h2,h3;
@@ -148,11 +148,11 @@ public abstract class Character {
     }
     
     public int expWorth () { 
-	return (50 + (_level ^ 10) + ((int) (_level * Math.random()))); 
+	return (_level * 3) + (int) (10 * Math.random()); 
     }
 
     public int goldWorth () { 
-	return (50 + (_level ^ 10) + ((int) (_level * Math.random()))); 
+	return (_level * 3) + (int) (10 * Math.random()); 
     }
     
     public int getGold () { 

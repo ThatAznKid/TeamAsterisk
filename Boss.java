@@ -16,6 +16,10 @@ public class Boss extends Character {
     
     public void normalize(){
     }
+    
+    public String toString(){
+    	return "in the very heart of the mountain. You feel goosebumps as you realize someone (or something...) is rapidly approaching...";
+    }
 
     public void specialize(){
     }

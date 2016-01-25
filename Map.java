@@ -62,22 +62,19 @@ public class Map {
 
     public String townDef(int x, int y){
 	if (x < 3 && y < 3) {
-	    return "Dragnok, the first town.";
+	    return "Dragnok";
 	}
 	if (x > 8 && y < 3) {
-	    return "Yeevile, the second town.";
+	    return "Yeevile";
         }
 	if (x < 3 && y > 8) {
-	    return "Cernar, the third town.";
+	    return "Cernar";
 	}
 	if (x > 8 && y > 8) {
-	    return "Wayner, the fourth and final town.";
+	    return "Wayner";
 	}
-	if (x == 5 && y == 3) { 
-	    return "the very heart of the mountain. You feel goosebumps as you realize someone (or something...) is rapidly approaching..."; 
-	}
-	return "transition between towns.";
-    } 
+	return "null";
+     } 
     
     public int monsterDeterminer (int x, int y) {
 	int holder = -1;
