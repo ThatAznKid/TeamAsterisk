@@ -15,9 +15,28 @@ public class Inventory{
     	in = new BufferedReader( isr );
     }
     
+    public int getReq(String town){
+	    if (town.equals("Dragnok")) {return 10;}
+    	if (town.equals("Yeevile")) {return 20;}
+    	if (town.equals("Cernar"))  {return 30;}
+    	if (town.equals("Wayner"))  {return 40;}
+    	else return 0;
+    }
+    
     public String toString(){
         String retstr = "Equipment:\n" + displayEqu() + "\nInventory:\n" + displayInv();
         return retstr;
+    }
+    
+    public boolean spaceCheck(){
+        for (Item[] r : slots){
+            for (Item c : r){
+                if (c == null){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public String displayEqu(){
@@ -85,14 +104,13 @@ public class Inventory{
     }
     
     //interactions with inventory handler
-    public int interact(int lvl, int g){
+    public int interact(int lvl, int g, String Town){
         int opt = 0;
-        int gain = 0;
         System.out.println("\033[H\033[2J");
         while (opt != 5){
             System.out.println(this);
-            System.out.println("What do you wish to do to your inventory?");
-            System.out.println("1. Drop item | 2. Equip item | 3. View Item details | 4. Sell item (in Town) | 5. Return to the game.");
+            System.out.println("\nWhat do you wish to do to your inventory?");
+            System.out.println("1. Drop item | 2. Equip item | 3. View Item details | 4. Trade (in Town) | 5. Return to the game.");
             try {
 	            opt = Integer.parseInt(in.readLine());
 	        }
@@ -108,14 +126,38 @@ public class Inventory{
 	            interactview();
 	        }
 	        if (opt == 4){
-	            gain += interactsell("town");
+	            int ch = 0;
+	            System.out.println("\033[H\033[2J");
+	            while (ch != 4){
+	            if (Town.equals("null") || Town.equals("Boss")){
+                    System.out.println("\033[H\033[2J" + "You're not in a town!");
+                    break;
+                }   
+	            System.out.println(this + "\nWhat would you like to trade?\n1. Sell items | 2. Buy potions | 3. Buy equipment | 4. Return to inventory");
+	            try{
+	                ch = Integer.parseInt(in.readLine());
+	            }
+	            catch (IOException e) { };
+	            if (ch == 1){
+	                g += interactsell(Town);
+	            }
+	            if (ch == 2){
+	                g += interactbuy(g, getReq(Town), 0);
+	            }
+	            if (ch == 3){
+	                g += interactbuy(g, getReq(Town), 1);
+	            }
+	            if (ch == 4){
+	                System.out.println("\033[H\033[2J" + "You now have " + g + " gold.");
+	            }
+	            }
 	        }
 	        if (opt == 5){
-	            System.out.println("You got " + gain + " gold.");
-	            return gain;
+	            System.out.println("You now have " + g + " gold.");
+	            return g;
 	        }
         }
-        return gain;
+        return g;
     }
     
     //drop handler
@@ -263,6 +305,48 @@ public class Inventory{
 	    return gain;
     }
     
+    public int interactbuy(int g, int l, int type){
+        Shop temp = new Shop(type, l);
+        System.out.println("\033[H\033[2J");
+        int gain = 0;
+        int c = 0;
+        while (c != -10){
+            System.out.println(temp + "\nWhat do you wish to buy? " + "(0 - " + (temp.getLength() - 1) + ") -10 if you're done!") ;
+            try {
+                c = Integer.parseInt(in.readLine());
+            }
+            catch (IOException e) { }
+            if (c == -10){break;}
+            
+            if (c > temp.getLength() - 1 || c < 0){
+                System.out.println("\033[H\033[2J" + "\nThis is not an item in the store.");
+            }
+            else if (g < (temp.getItem(c)).getGold()){
+                System.out.println("\033[H\033[2J" + "\nYou're too poor, you can't buy this.");
+            }
+            
+            else if (!this.spaceCheck()) {
+                System.out.println("\033[H\033[2J" + "\nYou have no space in your inventory.");
+            }
+            
+            else {
+	            System.out.println("Are you sure? Y/N");
+	            String confirm = "";
+	            try{
+	                confirm = in.readLine();
+	            }
+	            catch (IOException e) { }
+	            if (confirm.equals("Y")){
+	                System.out.println("\033[H\033[2J" + "You just bought a " + temp.getItem(c) + " for " + this.buy(temp.getItem(c)) + " gold");
+	                gain -= (temp.getItem(c)).getGold();
+	                g += gain;
+	                }
+	            else System.out.println("\033[H\033[2J");
+                }  
+        }
+        return gain;
+    }
+    
     
     public static void main(String[] args){
         Inventory yeah = new Inventory();
@@ -276,6 +360,6 @@ public class Inventory{
             
         }
         
-        yeah.interact( 5, 500 );
+        yeah.interact( 10, 500, "Dragnok");
     }
 }
