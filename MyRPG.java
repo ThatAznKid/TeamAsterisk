@@ -4,7 +4,7 @@ import java.util.*;
 public class MyRPG { 
      
     private Character noob; 
-    private Monster weewoo;
+    private Character weewoo;
     private InputStreamReader isr;
     private BufferedReader in;
     private int delay;	
@@ -54,7 +54,21 @@ public class MyRPG {
 	int holder = -1; 
 	int damage1, damage2;
 	holder = difficulty; 
-	weewoo = new Monster(); 
+	if (holder == 1) { 
+	    weewoo = new Monster1(); 
+	} 
+	if (holder == 2) { 
+	    weewoo = new Monster2(); 
+	} 
+	if (holder == 3) { 
+	    weewoo = new Monster3(); 
+	} 
+	if (holder == 4) { 
+	    weewoo = new Monster4(); 
+	} 
+	if (holder == 9000) { 
+	    weewoo = new Boss(); 
+	} 
 	while (weewoo.isAlive() && noob.isAlive()) { 
 	    //hit 'em with a splash attack 
 
@@ -86,7 +100,7 @@ public class MyRPG {
 	    if (!noob.isAlive() && weewoo.isAlive()) { 
 		s= "You seem to have gotten knocked out cold.\n"; 
 		s+= "Back to the field we go...\n"; 
-		s+= "I think you lost some gold, while you were out cold...";
+		s+= "I think you lost some gold, while you were out cold...\n";
 		printWithDelay(s); 
 	    } 
 	    else if (noob.isAlive() && !weewoo.isAlive()) {  

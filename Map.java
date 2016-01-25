@@ -41,9 +41,6 @@ public class Map {
 		if (key.equals("=") || key.equals("|")){
 		    _mop[y][x] = new Bridge();
 		}
-		if(key.equals("B")){
-		   _mop[y][x] = new Boss();
-		}
 		_mop[y][x] = new Blank();
 	    }
 	}
@@ -97,7 +94,7 @@ public class Map {
 	    holder = 4;
 	}
 	if (x == 5 && y == 3) { 
-	    holder =9000; 
+	    holder = 9000; 
 	}
 	return holder;
     }
