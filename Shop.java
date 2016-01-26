@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+
 public class Shop{
     private Object[][] items;
     private Item[] potions = new Item[4];
@@ -19,6 +22,13 @@ public class Shop{
             retstr += "\n";
         }
         return retstr;
+    }
+    
+    public Item getItem(int c){
+        return (Item)items[c][0];
+    }
+    public int getLength(){
+        return items.length;
     }
     
     public Shop(int type, int lvl){
@@ -46,33 +56,12 @@ public class Shop{
             }
         }
     
-    public int interactbuy(int g, int l, int type){
-        Shop temp = new Shop(type, l);
-        System.out.println("\033[H\033[2J");
-        System.out.println(this + "\n What do you wish to buy?" + "1 - " + Shop.length + "-10 if you're done!") ;
-        int gain = 0;
-        int c = 0;
-        while (c != -10){
-            try {
-                c = Integer.parseInt(in.readLine());
-            }
-            catch (IOException e) { }
-            
-            if (c > Shop.length - 1 || (c < 0 && c != -10)){
-                System.out.println("\033[H\033[2J");
-                return gain;
-            }
-            
-            
-            }
-        }
-    }
-    
         public static void main(String[] args){
             Shop tis = new Shop(0,0);
             Shop tat = new Shop(1,10);
             
             System.out.println("tis shop:\n" + tis); 
             System.out.println("tat shop:\n" + tat); 
+            
         }
     }
