@@ -69,15 +69,6 @@ public class MyRPG {
 	else if (choice.equals("i")) {
 		noob.setGold(inv.interact(noob.getLevel(),noob.getGold(),(rpg.tileGet(rpg.getx(), rpg.gety())).getTown()));
 	}
-	else if (choice.equals("yes")) {
-		noob.setGold(500);
-		noob.gainEXP(500);
-		noob.levelUp();
-		noob.levelUp();
-		noob.levelUp();
-		noob.levelUp();
-		noob.levelUp();
-	}
     }//end dailyLife
 	
 	

@@ -29,7 +29,7 @@ public class Warrior extends Character {
 
     public String moveSet(){
 	String s = "";
-	s += "\t1: Basic Attack\n\t2: Offensive Charge\n\t3: Use Potion.";
+	s += "\t1: Basic Attack\n\t2: Offensive Charge\n\t3: Use Potion.\n";
 	return s;
     } 
 
