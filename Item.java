@@ -5,6 +5,8 @@ public class Item{
     private int eslot;
     private String desc;
     private int health;
+    private int strength;
+    private int Def;
     
     public Item(int g, String n, int r, int e, String d){
         gold = g;
@@ -13,6 +15,8 @@ public class Item{
         eslot = e;
         desc = d;
         health = -1;
+        strength = (int)(req - (req * Math.random())) + 1;
+        Def = (int)(req - (req * Math.random())) + 1;
     }
     
     public Item(int g, String n, String d, int h){
@@ -45,5 +49,11 @@ public class Item{
     }
     public int getHealth(){
         return health;
+    }
+    public int getStrength(){
+        return strength;
+    }
+    public int getDef(){
+        return Def;
     }
 }

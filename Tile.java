@@ -3,4 +3,8 @@ public abstract class Tile{
     protected boolean isSafe;
 
     public abstract void option(int n);
+    
+    public String getTown(){
+        return town;
+    }
 }

@@ -4,210 +4,22 @@ import java.util.*;
 public class MyRPG { 
      
     private Character noob; 
-    private Character weewoo;
+    private Monster weewoo;
     private InputStreamReader isr;
     private BufferedReader in;
-    private int delay;	
+    private int delay;
+    private Inventory inv;
+    private Map rpg;
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
     
     public MyRPG () { 
     	isr = new InputStreamReader( System.in );
     	in = new BufferedReader( isr );
-	delay = 10; //0 for testing, 25 for general users
+		delay = 10;
     	newGame (); 
     }
     
-    public void printWithDelay (String s) { 
-	for ( int x = 0 ; x < s.length() ; x++ ) { 
-	    System.out.print (s.substring(x,x+1)); 
-	    try {
-		Thread.sleep(delay); 
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
-	}
-    }// end printWithDelay
-    
-    public void dailyLife (String choice) { 
-	String s;
-	if (choice.equals("!")) { 
-	    s= "Nice seeing ya around. Hope to see you again sometime.\n"; 
-	    printWithDelay(s);
-	    System.exit(0); 
-	}
-	else if (choice.equals("r")) { 
-	    rest(); 
-	} 
-	else if (choice.equals("v")) { 
-	    viewStats(); 
-	}
-	else if (choice.equals("o")) { 
-	    options(); 
-	}	
-	else if (choice.equals("h")) { 
-	    help(); 
-	}
-    }//end dailyLife
-
-    //dailyLife option 1
-    public void fightMonster (int difficulty) { 
-	String s;
-	int holder = -1; 
-	int damage1, damage2;
-	holder = difficulty; 
-	if (holder == 1) { 
-	    weewoo = new Monster1(); 
-	} 
-	if (holder == 2) { 
-	    weewoo = new Monster2(); 
-	} 
-	if (holder == 3) { 
-	    weewoo = new Monster3(); 
-	} 
-	if (holder == 4) { 
-	    weewoo = new Monster4(); 
-	} 
-	if (holder == 5) { 
-	    weewoo = new Monster5(); 
-	}
-	if (holder == 6) { 
-	    weewoo = new Monster6(); 
-	}
-	if (holder == 7) { 
-	    weewoo = new Monster7(); 
-	}
-	if (holder == 8) { 
-	    weewoo = new Monster8(); 
-	}
-	if (holder == 9000) { 
-	    weewoo = new Boss(); 
-	} 
-	while (weewoo.isAlive() && noob.isAlive()) { 
-	    //hit 'em with a splash attack 
-
-	    s= "You've encountered a monster!\n"; 
-	    s+= "What will you do?\n"; 
-	    s+= noob.getName() + " has " + noob.getHealth() + " hitpoints left.\n";
-	    s+= weewoo.getName() + " has " + weewoo.getHealth() + " hitpoints left.\n";
-	    s+= noob.moveSet();   
-	    printWithDelay(s); 
-	    holder = errorHandlerInt(2); 
-	  
-	    //what do? 
-	    if (holder == 2) { 
-		noob.specialize(); 
-	    } 
-	    else { 
-		noob.normalize(); 
-	    }
-	      
-	    //fight! 
-	    damage1 = noob.attack (weewoo); 
-	    damage2 = weewoo.attack (noob); 
-	    
-	    s = noob.getName() + " dealt " + damage1 + " points of damage!\n"; 
-	    s+= noob.getName() + " took " + damage2 + " points of damage from the attack!\n";
-	    printWithDelay (s);   
-
-	    //still alive and kicking? 
-	    if (!noob.isAlive() && weewoo.isAlive()) { 
-		s= "You seem to have gotten knocked out cold.\n"; 
-		s+= "Back to the field we go...\n"; 
-		s+= "I think you lost some gold, while you were out cold...\n";
-		printWithDelay(s); 
-	    } 
-	    else if (noob.isAlive() && !weewoo.isAlive()) {  
-		int placeholder = weewoo.expWorth();
-		int placeholder2 = weewoo.goldWorth();
-		s= "You seem to have killed the guy. Great job!\n"; 
-		s+= "You gained " + placeholder + " EXP!\n"; 
-		s+= "You also gained " + placeholder2 + " gold!\n";
-		noob.gainEXP (placeholder);  
-		noob.gainGold (placeholder2);
-		printWithDelay(s); 
-		noob.levelUp();
-		s= "Back to the field we go.\n"; 
-		printWithDelay(s);
-	    } 
-	    else if (!noob.isAlive() && !weewoo.isAlive()){ 
-		s= "I guess both of you killed each other simultaneously somehow...\n";
-		s+= "That's cool..."; 
-		s+= "Wonder if it was like an anime scene...\n"; 
-		s+= "Ahem. Back to the field we go.\n"; 
-		s+= "Don't think you're getting any gold or exp for this.\n";
-		s+= "You do seem strangely resilient, however...Didn't you die just now? Whatever, I do think you lost some gold, though.";
-		printWithDelay(s); 
-	    }
-	}
-	      
-    }//end fightMonster
-    
-	//dailyLife option 2 
-    public void rest() { 
-	noob.daysAliveIncrement();   
-	noob.setHitPts(noob.getOrigHitPts());  
-	String s; 
-	s= "You awake feeling well refreshed and determined.\n";
-	printWithDelay(s); 
-    }//end rest
-	
-	//dailyLife option 3
-    public void viewStats() { 
-	String s; 
-	s= "Level: " + noob.getLevel()+"\n"; 
-	s+= "EXP needed to level up: " + (noob.getLevel() * 60 - noob.getEXP() ) +"\n"; 
-	s+= "Current HP: " + noob.getHealth()+"\n"; 
-	s+= "Total HP: " + noob.getOrigHitPts()+"\n"; 
-	s+= "Attack Power: " + noob.getStrength()+"\n"; 
-	s+= "Defense: " + noob.getDefense()+"\n";
-	s+= "Gold: " + noob.getGold() + "\n";
-	printWithDelay (s);
-    }//end viewStats 
-
-    //dailyLife 4
-    public void options () {
-	int holder = -1;
-	try { 
-	    String s; 
-	    s = "How fast would you like the text to be?\n"; 
-	    s+= "1. Fast\n"; 
-	    s+= "2. Medium\n"; 
-	    s+= "3. Slow\n"; 
-	    s+= "4. No delay\n"; 
-	    printWithDelay(s);	
-	    holder = Integer.parseInt (in.readLine()); 
-	}
-	catch (	IOException e ) { }
-	if (holder == 1) { 
-	    delay = 10; 
-	} 
-	else if (holder == 2) { 
-	    delay = 25; 
-	} 
-	else if (holder == 3) { 
-	    delay = 50; 
-	} 
-	else if (holder == 4) { 
-	    delay = 0; 
-	} 
-    }
-
-    //dailyLife5 
-    public void help () { 
-	String s;
-	s= "Remember, just use WASD to move around on the map.\n";
-	s+= "Right now, you can: \n";  
-	s+= "!. Quit game. All data will be lost.\n";
-	s+= "f. Fight some gnarly monsters!\n";  
-	s+= "r. Take a rest and restore your health\n"; 
-	s+= "v. View Inventory and Stats\n"; 
-	s+= "o. Settings/Options\n"; 
-	s+= "i. Check your inventory\n";
-	s+= "X will mark where you are.\n";
-	s+= "There is a large chance of encountering a monster with every step you take.";
-	printWithDelay(s); 
-    }
-	
-    //error handling for int inputs
     public int errorHandlerInt (int range) { 
 	boolean isGood = false;
 	int holder = 100;
@@ -225,14 +37,219 @@ public class MyRPG {
 	}
 	return holder;
     }
+    
+    public void printWithDelay (String s) { 
+	for ( int x = 0 ; x < s.length() ; x++ ) { 
+	    System.out.print (s.substring(x,x+1)); 
+	    try {
+		Thread.sleep(delay); 
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	}
+    }// end printWithDelay
+    
+    public void dailyLife (String choice) {
+    String Town = (rpg.tileGet(rpg.getx(),rpg.gety())).getTown();
+	String s;
+	if (choice.equals("!")) { 
+	    s= "Nice seeing ya around. Hope to see you again sometime.\n"; 
+	    printWithDelay(s);
+	    System.exit(0); 
+	}
+	else if (choice.equals("r")) { 
+	    rest(Town); 
+	} 
+	else if (choice.equals("v")) { 
+	    viewStats(); 
+	}
+	else if (choice.equals("o")) { 
+	    options(); 
+	}	
+	else if (choice.equals("i")) {
+		noob.setGold(inv.interact(noob.getLevel(),noob.getGold(),(rpg.tileGet(rpg.getx(), rpg.gety())).getTown()));
+	}
+	else if (choice.equals("yes")) {
+		noob.setGold(500);
+		noob.gainEXP(500);
+		noob.levelUp();
+		noob.levelUp();
+		noob.levelUp();
+		noob.levelUp();
+		noob.levelUp();
+	}
+    }//end dailyLife
+	
+	
+	
+    //dailyLife option 1
+    public void fightMonster() { 
+	String s;
+	int holder = -1; 
+	int damage1, damage2;
+	weewoo = mapMonster();
+	((Character)noob).setdeftot(((Inventory)inv).getdeftot());
+	((Character)noob).setstrtot(((Inventory)inv).getstrtot());
+	s= "\033[H\033[2J" + "You've encountered a " + weewoo + "\n";
+	printWithDelay(s);
+	while (weewoo.isAlive() && noob.isAlive()) { 
+	    //hit 'em with a splash attack 
+		s= noob.getName() + " has " + noob.getHealth() + " hitpoints left.\n";
+		s+= weewoo.getName() + " has " + weewoo.getHealth() + " hitpoints left.\n";
+		s+= "What will you do?\n"; 
+		s+= noob.moveSet();   
+		printWithDelay(s); 
+		holder = errorHandlerInt (3); 
 
-    //let's begin
+	    
+	    //what do? 
+	    if (holder == 3){
+	    		noob.setHitPts(noob.getHitPts() + inv.interactuse());
+	    	}	
+	    else if (holder == 2) { 
+		noob.specialize(); 
+	    } 
+	    else { 
+		noob.normalize(); 
+	    }
+	      
+	    //fight! 
+	    damage1 = noob.attack (weewoo); 
+	    damage2 = weewoo.attack (noob); 
+	    
+	    s = noob.getName() + " dealt " + damage1 + " points of damage!\n"; 
+	    s+= noob.getName() + " took " + damage2 + " points of damage from the attack!\n";
+	    printWithDelay (s);   
+
+	    //still alive and kicking? 
+	    if (!noob.isAlive() && weewoo.isAlive()) { 
+		s= "Thou hath been slewn!\n";
+		s+= "Odin incurs His wrath upon thee!\n";
+		s+= "'Thou hast lost thy game of life.'\n";
+		printWithDelay(s);
+		try {
+        in.readLine();
+         }
+    	catch ( IOException e) { }
+    	System.exit(1);
+	    } 
+	    else if (noob.isAlive() && !weewoo.isAlive()) {  
+		int placeholder = weewoo.expWorth();
+		int placeholder2 = weewoo.goldWorth();
+		s= "You seem to have killed the guy. Great job!\n"; 
+		s+= "You gained " + placeholder + " EXP!\n";
+		s+= "You gained " + placeholder2 + " GOLD!\nType anything to continue.";
+		noob.gainEXP (placeholder);
+		noob.gainGOLD (placeholder2);
+		printWithDelay(s);
+		try {
+        in.readLine();
+         }
+    	catch ( IOException e) { }
+		noob.levelUp();
+		
+		if (weewoo.equals("Dark Arcane Magician")){
+			s = "The mage's body contorts, soaring high into the sky.\n";
+			s += "Lights beam across the sky, Odin bows his head.\n";
+			s += "'You've done it... you've saved us, thank you!'";
+			printWithDelay(s);
+			try {
+	    	in.readLine();
+			}
+			catch ( IOException e ) { }
+			System.exit(1);
+		}
+	    } 
+	    else if (!noob.isAlive() && !weewoo.isAlive()){ 
+		s= "I guess both of you killed each other simultaneously somehow...\n";
+		s+= "That's cool..."; 
+		s+= "Wonder if it was like an anime scene...\n"; 
+		s+= "Jesus is holding his hand out for you...\n";
+		s+= "'It's time to go, my son.'";
+		printWithDelay(s);
+		try {
+	    in.readLine();
+		}
+		catch ( IOException e ) { }
+		System.exit(1);
+	    }
+	}
+	      
+    }//end fightMonster
+    
+	//dailyLife option 2 
+    public void rest(String Town) {
+	String s; 
+    if (Town == "null" || Town == "Boss"){
+    	s= "You are not in a town, you can't rest here!\n";
+    	s+= "Type anything to continue.";
+		printWithDelay(s);
+		try {
+	    in.readLine();
+		}
+		catch ( IOException e ) { }
+    	}
+	else {noob.setHitPts(noob.getOrigHitPts()); 
+		s= "You awake feeling well refreshed and determined.\n";
+		s+= "Type anything to continue.";
+		printWithDelay(s);
+		try {
+        	in.readLine();
+         	}
+    	catch ( IOException e) { }
+    	}
+    }//end rest
+	
+	//dailyLife option 3
+    public void viewStats() { 
+	String s;
+	s= "\033[H\033[2J" + "Level: " + noob.getLevel()+"\n"; 
+	s+= "EXP: " + noob.getEXP()+"\n";  
+	s+= "EXP needed to level up: " + (40 * noob.getLevel() - noob.getEXP()) +"\n"; 
+	s+= "Current HP: " + noob.getHealth()+"\n"; 
+	s+= "Total HP: " + noob.getOrigHitPts()+"\n"; 
+	s+= "Attack Power: " + noob.getStrength() + " " + ANSI_GREEN + "(+ " + inv.getstrtot() + ")" + ANSI_RESET + "\n"; 
+	s+= "Defense: " + noob.getDefense() + " " + ANSI_GREEN + "(+ " + inv.getdeftot() + ")" + ANSI_RESET + "\n";
+	s+= "Gold: " + noob.getGold() +"\n"; 
+	s+= "Type anything to go back.";
+	printWithDelay (s);
+    try {
+        in.readLine();
+         }
+    catch ( IOException e) { }
+    }//end viewStats 
+
+    //dailyLife 4
+    public void options () {
+	int holder = -1;
+	    String s; 
+	    s = "How fast would you like the text to be?\n"; 
+	    s+= "1. Fast\n"; 
+	    s+= "2. Medium\n"; 
+	    s+= "3. Slow\n"; 
+	    s+= "4. No delay\n"; 
+	    printWithDelay(s);	
+	    holder = errorHandlerInt (4); 
+	if (holder == 4) { 
+	    delay = 0; 
+	} 
+	else if (holder == 3) { 
+	    delay = 50; 
+	} 
+	else if (holder == 2) { 
+	    delay = 25; 
+	} 
+	else{ 
+	    delay = 10; 
+	} 
+    }
+
+	//let's begin
     public void newGame() { 
 
 	//starting a new game... 
 	//let's get that name of yours...
-	Map rpg = new Map();
-	Inventory inv = new Inventory();
+	rpg = new Map();
 	String s; 
 	String name = "";
 	int holder = -1;
@@ -247,72 +264,179 @@ public class MyRPG {
 	catch ( IOException e ) { }
        
 	//done with the intro, time to pick a class
-	s= "Ah, I see.\n"; 
+	s= "\033[H\033[2J" + "Ah, I see...\n"; 
 	s+= "Pleased to meet you, " + name + ". "; 
-	s+= "Well, what class happens to tickle your fancy? "; 
-	s+= "You only have a choice between a warrior and a mage right now, but each class has a variety of options to work with that you will find out about later.\n"; 
-	s+= "Pick the number choice of the class you'd like.\n"; 
+	s+= "Well, what class happens to tickle your fancy?\n";
 	s+= "1. Warrior\n"; 
 	s+= "2. Mage\n"; 
 	printWithDelay (s); 
-	holder = errorHandlerInt(2);
+	holder = errorHandlerInt (2);
+
+
+	//time to begin? initialize a new one
+	s=  "\033[H\033[2J" +"I see...I see...\n"; 
+	s+= "It is time to start your adventure!\n";
+	s+= "Your objective is to reach the top and defeat the Dark Arcane Magician!\n";
+	s+= "You must reach a certain level to progress through each town.\n";
+	s+= "Each town will provide stronger and stronger equipment!\n";
+	s+= "But, BEWARE! There have been stories about some cons selling bad equipment.\n\n";
+	s+= "You use WASD to traverse the map.\n";
+	s+= "Remember! You are prone to attacks from monsters outside of town.\n";
+	s+= "The X will mark where you are.\n\n";
+	s+= "Type anything to continue.\n";
+	printWithDelay (s);
+	try {
+        in.readLine();
+         }
+    catch ( IOException e) { }
 	if (holder == 1) { 
-	    noob = new Warrior (name); 
+	    noob = new Warrior (name);
+	    inv = new Inventory();
 	} 
 	else { 
-	    noob = new Mage(name); 
-	}  
-	//time to begin? initialize a new one
-	s= "I see...I see...\n"; 
-	s+= "Well, it appears it is time to start your adventure...\n"; 
-	s+= "So...for the time being you're in the first town, Dragnok.\n"; 
-	s+= "Recently, there's been a large infestation of monsters in every town, and we think the source is coming from the mountain in the middle. Please, we need your help! Stop the source of these irregularities!";
-	s+= "You will not being able to progress from town to town until you hit a certain level. You must be level 5 to access the second town, level 10 to access the third town and so on. The bridges will appear when you are of level.\n";
-	s+= "Remember, just use WASD to move around on the map.\n";
-	s+= "Right now, you can: \n";  
-	s+= "!. Quit game. All data will be lost.\n";
-	s+= "f. Fight some gnarly monsters!\n";  
-	s+= "r. Take a rest and restore your health\n"; 
-	s+= "v. View Inventory and Stats\n"; 
-	s+= "o. Settings/Options\n"; 
-	s+= "i. Check your inventory\n";
-	s+= "X will mark where you are.\n";
-	s+= "Remember, type h for help if you forget any commands.\n";
-	printWithDelay (s); 
+	    noob = new Mage(name);
+	    inv = new Inventory();
+	} 
 
 	//story time 
-        for ( ; ; ) {
-	    System.out.println(rpg);
-	    s= "Day " + noob.getDaysAlive() + " of being here, congrats.\n";
-	    s+= "Right now, you are in " + rpg.getTile(rpg.getx(),rpg.gety()) + "\n";
+	while (holder != -1) {
+	    System.out.println("\033[H\033[2J" + rpg);
+	    s= "You are now " + rpg.tileGet(rpg.getx(), rpg.gety()) + "\nWhat would you like to do?\n";
+	    s+= localopt((rpg.tileGet(rpg.getx(),rpg.gety())).getTown());
 	    printWithDelay(s);
 	    try {
 		str = in.readLine();
 	    }
 	    catch ( IOException e ) { }
-	    dailyLife(str); 
-	    if (str.equals("i")) { 
-		//Inventory.interact(noob.getLevel(),noob.getGold(),townD(rpg.getx(),rpg.gety())); 
+	    double c = Math.random();
+	    String Town = (rpg.tileGet(rpg.getx(), rpg.gety())).getTown();
+	    if (Town.equals("Boss")){
+	    	fightMonster();
 	    }
+	    else if (c > .75 && (Town == "null")){
+	    	fightMonster();
+	    }
+	    else{
+	    dailyLife(str); 	
 	    if (str.equals("w")) { 
-		rpg.move ("w"); 
+			rpg.move ("w"); 
 	    }
-	    if (str.equals("a")) { 
-		rpg.move ("a"); 
+	    if (str.equals("a")) {
+	    	if ((rpg.tileGet(rpg.getx() - 1, rpg.gety()).getTown()).equals("Wayner") && noob.getLevel() < 20){
+	    	s = "'You are too weak for our town!' squeeled the Galways. Level 20 required.";
+	    	s += "\nType anything to continue.\n";
+	    	printWithDelay(s);
+	    	try{
+	    		in.readLine();
+	    	}
+	    	catch (IOException e) { };}
+	    else rpg.move ("a"); 
 	    }
-	    if (str.equals("s")) { 
-		rpg.move ("s"); 
+	    if (str.equals("s")) {
+	    	if ((rpg.tileGet(rpg.getx(), rpg.gety() + 1).getTown()).equals("Cernar") && noob.getLevel() < 15){
+	    	s = "'You shall not pass!' quoth the White King. Level 15 required.";
+	    	s += "\nType anything to continue.\n";
+	    	printWithDelay(s);
+	    	try{
+	    		in.readLine();
+	    	}
+	    	catch (IOException e) { };}
+	    else rpg.move ("s"); 
 	    }
-	    if (str.equals("d")) { 
-		rpg.move ("d"); 
-	    }	
-	    rpg.barrier(noob.getLevel());
-	    holder = ((int) (Math.random ()*10));
-	    if (3 > holder) { 
-		fightMonster(rpg.monsterDeterminer(rpg.getx(),rpg.gety())); 
+	    if (str.equals("d")) {
+	    	if ((rpg.tileGet(rpg.getx() + 1, rpg.gety()).getTown()).equals("Yeevile") && noob.getLevel() < 10){
+	    	s = "'Halt frail boy, where do you think you're going!' said the guard. Level 10 required.";
+	    	s += "\nType anything to continue.\n";
+	    	printWithDelay(s);
+	    	try{
+	    		in.readLine();
+	    	}
+	    	catch (IOException e) { };}
+		else rpg.move ("d"); 
+	    }
 	    }
 	}
     }//end newGame 
+
+	public String localopt(String Town){
+		String s = "";
+		if (Town == "null"){
+				s+= "!. Quit game. All data will be lost.\n";
+				s+= "v. View Stats\n";
+				s+= "i. Open Inventory\n";
+				s+= "o. Settings/Options\n"; 
+		}
+		else if (Town == "Boss"){
+				s+= "!. Quit game. All data will be lost.\n"; 
+				s+= "v. View Stats\n";
+				s+= "i. Open Inventory\n";
+				s+= "o. Settings/Options\n";
+		}
+		else {
+				s+= "!. Quit game. All data will be lost.\n";
+				s+= "r. Rest and restore health.\n";  
+				s+= "v. View Stats\n";
+				s+= "i. Open Inventory\n";
+				s+= "o. Settings/Options\n";
+		}
+		return s;
+	}
+	
+	public Monster mapMonster(){
+		int x = rpg.getx();
+		int y = rpg.gety();
+		Monster nota;
+		double c = Math.random();
+		if (x >= 3 && x <= 8 && y == 1){
+			if (c >= .25){
+				nota = new Monster(1 + (int)(2 * Math.random()), "Green Slime");
+				return nota;
+			}
+			if (c < .25){
+				nota = new Monster(3 + (int)(3 * Math.random()), "Decaying Skeleton");
+				return nota;
+			}
+		}
+		
+		if (x == 10 && y >= 3 && y <= 8){
+			if (c >= .25){
+				nota = new Monster(5 + (int)(2 * Math.random()), "Rabid Wolf");
+				return nota;
+			}
+			if (c < .25){
+				nota = new Monster(7 + (int)(3 * Math.random()), "Ferocious Zombie");
+				return nota;
+			}
+		}
+		
+		if (x >= 3 && x <= 8 && y == 10){
+			if (c >= .25){
+				nota = new Monster(10 + (int)(2 * Math.random()), "Goblin Warrior");
+				return nota;
+			}
+			if (c < .25){
+				nota = new Monster(12 + (int)(3 * Math.random()), "Ancient Golem");
+				return nota;
+			}
+		}
+		
+		if (x == 5 && y == 3){
+			nota = new Monster(25,"Dark Arcane Magician");
+			return nota;
+			}
+		
+		if (x > 0 && x < 8 && y >= 3 && y <= 8){
+			if (c >= .25){
+				nota = new Monster(15 + (int)(3 * Math.random()), "Bloodred Wyvern");
+				return nota;
+			}
+			if (c < .25){
+				nota = new Monster(17 + (int)(3 * Math.random()), "Ragged Dragon");
+				return nota;
+			}
+		}
+		return null;
+	}
 
     public static void main (String [] args) { 
 	MyRPG game = new MyRPG();

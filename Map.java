@@ -6,7 +6,7 @@ public class Map {
     private static BufferedReader in;
     
     private static final Object[][] _map = {{"o","o","o"," "," "," "," "," "," ","o","o","o"},
-					    {"o","D","o","+","+","=","=","+","+","o","Y","o"},
+					    {"o","T","o","+","+","=","=","+","+","o","A","o"},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"},
 					    {" "," "," "," "," ","B","=","+"," "," ","+"," "},
 					    {" "," "," "," "," "," "," ","|"," "," ","|"," "},
@@ -15,7 +15,7 @@ public class Map {
 					    {" ","+"," "," ","+","=","+"," "," "," ","+"," "},
 					    {" ","+"," "," "," "," "," "," "," "," ","+"," "},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"},
-					    {"o","W","o","+","+","=","=","+","+","o","C","o"},
+					    {"o","R","o","+","+","=","=","+","+","o","C","o"},
 					    {"o","o","o"," "," "," "," "," "," ","o","o","o"}};
     private Tile[][] _mop = new Tile[12][12] ;	
     private int xcord;
@@ -23,7 +23,7 @@ public class Map {
     
     public Map(){
 	isr = new InputStreamReader( System.in );
-    	in = new BufferedReader( isr );
+    in = new BufferedReader( isr );
 	xcord = 0;
 	ycord = 0;
 	int ctr = 1;
@@ -34,14 +34,17 @@ public class Map {
 	        if (key.equals("o") || key.equals("T") || key.equals("R") || key.equals("A") || key.equals("C")){
 		    _mop[y][x] = new Town(townDef(x,y), ctr);
 		    ctr += 1;
-		}
-		if (key.equals("+")){
+			}
+		else if (key.equals("+")){
 		    _mop[y][x] = new Road();
 		}
-		if (key.equals("=") || key.equals("|")){
+		else if (key.equals("=") || key.equals("|")){
 		    _mop[y][x] = new Bridge();
 		}
-		_mop[y][x] = new Blank();
+		else if (key.equals("B")){
+		   _mop[y][x] = new Boss();
+		}
+		else _mop[y][x] = new Blank();
 	    }
 	}
     }
@@ -62,25 +65,6 @@ public class Map {
 
     public String townDef(int x, int y){
 	if (x < 3 && y < 3) {
-	    return "Dragnok, the first town.";
-	}
-	if (x > 8 && y < 3) {
-	    return "Yeevile, the second town.";
-        }
-	if (x > 8 && y > 8) {
-	    return "Cernar, the third town.";
-	}
-	if (x < 3 && y > 8) {
-	    return "Wayner, the fourth and final town.";
-	}
-	if (x == 5 && y == 3) { 
-	    return "the very heart of the mountain. You feel goosebumps as you realize someone (or something...) is rapidly approaching..."; 
-	}
-	return "transition between towns.";
-    } 
-
-    public String townD(int x, int y){
-	if (x < 3 && y < 3) {
 	    return "Dragnok";
 	}
 	if (x > 8 && y < 3) {
@@ -94,39 +78,11 @@ public class Map {
 	}
 	return "";
     }
-    
-    public int monsterDeterminer (int x, int y) {
-	int holder = -1;
-	if (x < 3 && y < 3) {
-	    holder = 1;
-	}
-	if (x > 2 && x < 9 && y == 1) { 
-	    holder = 5; 
-	} 
-	if (x > 8 && y < 3) {
-	    holder = 2;
-        }
-	if (x == 1 && y > 2 && y < 9) { 
-	    holder = 6; 
-	}
-	if (x > 8 && y > 8) {
-	    holder = 3;
-	}
-	if (x > 2 && x < 9 && y == 10) { 
-	    holder = 7; 
-	} 
-	if (x < 3 && y > 8) {
-	    holder = 4;
-	}
-	if (x > 0 && x < 8 && y > 2 && y < 9) { 
-	    holder = 8; 
-	}
-	if (x == 5 && y == 3) { 
-	    holder = 9000; 
-	}
-	return holder;
-    }
 
+    public Tile tileGet(int x, int y){
+    	return _mop[y][x];
+    }
+    
     //accessors and mutators for x and y
     public int getx() {
 	return xcord;
@@ -167,38 +123,19 @@ public class Map {
 	    else setx(xcord + 1);
 	}
     }
- 
-    public void barrier (int level) { 
-	_map [1][3] = "+"; 
-	_map [3][10] = "+"; 
-        _map [10][8] = "+"; 
-	_map [8][1] = "+";
-	if (level < 5) { 
-	    _map [1][3] = " "; 
-	}
-	if (level < 10) { 
-	    _map [3][10] = " "; 
-	}
-	if (level < 15) { 
-	    _map [10][8] = " "; 
-	}
-	if (level < 20) { 
-	    _map [8][1] = " "; 
-	}
-    }
-	    
+	
 
     public static void main(String[] args){
-	Map test = new Map();
-	String holder = "";
-	while (holder != "EXIT"){
-	    System.out.println(test);
-	    try {
-		holder = in.readLine();
-	    }
-	    catch ( IOException e ){ }
-	    test.move(holder);
+    Map test = new Map();
+    String holder = "";
+    while (holder != "EXIT"){
+	System.out.println(test);
+	try {
+	    holder = in.readLine();
 	}
+	catch ( IOException e ){ }
+	test.move(holder);
+    }
     }
 
 }//end map

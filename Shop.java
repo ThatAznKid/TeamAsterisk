@@ -6,9 +6,16 @@ public class Shop{
     private Item[] potions = new Item[4];
     private Item[] equips = new Item[3];
     private String[] potname = {"10HP", "20HP", "30HP", "50HP", "100HP"};
-    private String[] equipname = {"Overalls", "Weapon", "Talisman"};
-    private int[] potprice = {100, 350, 800, 1200, 2000};
-    private int[] eqprice = {500,1000,1500,2500};
+    private String[][] equipname = {{"Rags", "Stick", "Stone"},
+                                  {"Leather", "Dagger", "Ruby"},
+                                  {"Chainmail", "Fireblade", "Diamond"},
+                                  {"Runeforge", "Trident", "Amber"}};
+    private String[][] equipdesc = {{"Pieces of strung together hide.", "A tree branch.", "A stone pendant."},
+                                    {"A set of leather armour.", "A small inconspicuous dagger.", "A ruby pendant."},
+                                    {"A set of iron chainmail armour.", "A blazing blade of fire.", "A diamond pendant."},
+                                    {"Set of armour forged from the strongest runes.", "The trident of Poseidon.", "An amber pendant."}};
+    private int[] potprice = {100, 200, 300, 400, 600};
+    private int[] eqprice = {50, 200, 450, 750};
     private int[] potheal = {10,20,30,50,100};
     private InputStreamReader isr;
     private BufferedReader in;
@@ -47,8 +54,8 @@ public class Shop{
         if (type == 1){
             items = new Object[3][2];
             for (Object[] rows : items){
-                rows[0] = new Item(eqprice[lvl/10 - 1], equipname[ctr], lvl, ctr, "A " + equipname[0]);
-                rows[1] = eqprice[lvl/10 - 1];
+                rows[0] = new Item(eqprice[lvl/5 - 1], equipname[lvl/5 - 1][ctr], lvl, ctr, equipdesc[lvl/5 - 1][ctr]);
+                rows[1] = eqprice[lvl/5 - 1];
                 ctr ++;
                 }
             isr = new InputStreamReader( System.in );
