@@ -12,7 +12,7 @@ public class MyRPG {
     public MyRPG () { 
     	isr = new InputStreamReader( System.in );
     	in = new BufferedReader( isr );
-	delay = 25; //0 for testing, 25 for general users
+	delay = 10; //0 for testing, 25 for general users
     	newGame (); 
     }
     
@@ -284,7 +284,7 @@ public class MyRPG {
         for ( ; ; ) {
 	    System.out.println(rpg);
 	    s= "Day " + noob.getDaysAlive() + " of being here, congrats.\n";
-	    s+= "Right now, you are in " + rpg.townDef(rpg.getx(),rpg.gety()) + "\n";
+	    s+= "Right now, you are in " + rpg.getTile(rpg.getx(),rpg.gety()) + "\n";
 	    printWithDelay(s);
 	    try {
 		str = in.readLine();

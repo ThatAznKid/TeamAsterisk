@@ -41,3 +41,13 @@ error handling should be good for the game
 *needs to be completely tested for holes
 all new monsters added 
 barriers added
+
+1/26/16
+Barriers removed -- Movement adjusted to replace barrier function.
+Monster classes removed- Replaced with overloaded constructor and various methods to create
+location based Monsters.
+Inventory.java -- Error handled and fixed
+Shop works, selling works, buying works, level works.
+RNGesus incorporated into gameplay (i.e. attack dmg, spawn rate, item stats)
+Display of data and such edited to look nicer.
+Storyline simplified, end-games incorporated w/ end messages.
